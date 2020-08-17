@@ -1,8 +1,19 @@
 package com.example.android.widget;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -33,14 +44,10 @@ textView=findViewById(R.id.tv_3);
 //        startService(new Intent(this, OverlayService.class));
 //        bindService(new Intent(this, OverlayService.class),new SuspensionPage.MyConnection(),BIND_AUTO_CREATE);
 //        startActivity(new Intent(this, MainActivity.class));
-//        Intent intent=new Intent(this, MyIntentService.class);
-        Intent intent = new Intent();
-        intent.setPackage("com.example.android");
-        intent.setAction("android.intent.action.startMyIntentService");
-        Bundle bundle = new Bundle();
-        bundle.putString("key","你好");
-        intent.putExtras(bundle);
-        startService(intent);
+//        Intent intent = new Intent();
+//        intent.setPackage("com.example.android");
+//        intent.setAction("android.intent.action.startMyIntentService");
+
 
 //        new Thread(new Runnable() {
 //            @Override
@@ -56,11 +63,41 @@ textView=findViewById(R.id.tv_3);
 //
 //            }
 //        }).start();
+        run();
+    }
+    void run(){
+        Intent intent=new Intent(this, MyIntentService.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("key","你好");
+        intent.putExtras(bundle);
+//        if(ActivityCompat.checkSelfPermission(this,
+//                Manifest.permission.FOREGROUND_SERVICE)!= PackageManager.PERMISSION_GRANTED) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                requestPermissions(new String[]{Manifest.permission.FOREGROUND_SERVICE},1);
+//            }
+//        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent);
+        } else {
+            startService(intent);
+        }
 
 
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==1){
+            if(grantResults.length>0&&grantResults[0]==0){
+                System.out.println("授权成功");
+                run();
+            }
+            else {
+                System.out.println("授权失败");
+            }
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

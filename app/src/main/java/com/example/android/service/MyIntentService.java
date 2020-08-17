@@ -62,10 +62,10 @@ public class MyIntentService extends IntentService {
                 .setContentText("正在运行...");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            localBuilder = new Notification.Builder(this, name);
             NotificationChannel channel = new NotificationChannel(name, "Notify", NotificationManager.IMPORTANCE_DEFAULT);
             manager.createNotificationChannel(channel);
             localBuilder.setChannelId(name);
+            channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         }
 //       if(manager!=null){
 //           manager.notify(1, localBuilder.build());
@@ -74,6 +74,7 @@ public class MyIntentService extends IntentService {
 //           System.out.println("Manager is null");
 //       }
 
-        startForeground(233, localBuilder.build());
+        startForeground(1, localBuilder.build());
+
     }
 }
