@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+<!--    <LinearLayout-->
+
+<!--        android:layout_width="match_parent"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:width="200dp"-->
+<!--            android:text="Hello World"-->
+<!--            app:chipIcon="@drawable/location_icon" />-->
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:id="@+id/chip2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:text="Hello World"-->
+<!--            android:width="100dp"-->
+<!--            app:chipStrokeWidth="100dp"-->
+
+<!--            app:chipIcon="@drawable/location_icon"-->
+<!--            android:layout_height="wrap_content" />-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+<!--        <com.google.android.material.chip.Chip-->
+<!--            android:layout_width="wrap_content"-->
+<!--            style="@style/Widget.MaterialComponents.Chip.Filter"-->
+<!--            app:chipIcon="@drawable/location_icon"-->
+<!--            android:text="Filter Chip"-->
+<!--            android:checked="true"-->
+<!--            app:checkedIcon="@drawable/location_icon"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+
+<!--    </LinearLayout>-->
+<!--  <com.google.android.material.chip.ChipGroup-->
+<!--      android:layout_width="wrap_content"-->
+<!--      android:id="@+id/chip_group"-->
+<!--      android:layout_height="wrap_content">-->
+
+<!--  </com.google.android.material.chip.ChipGroup>-->
+<!--    <Button-->
+<!--        android:onClick="showChip"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:text="show chip"-->
+<!--        android:layout_height="wrap_content"/>-->
+<!--    <View-->
+<!--        android:background="@drawable/view_bg"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="300dp">-->
+
+<!--    </View>-->
+<!--    <RatingBar-->
+<!--        style="@style/ratingBar_style"-->
+<!--        android:background="@drawable/rating_style"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--    </RatingBar>-->
+<!--    <Chronometer-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp">-->
+
+<!--    </Chronometer>-->
+<!--    <DatePicker-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--    </DatePicker>-->
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/languages"
+        />
+    <ViewFlipper
+        android:inAnimation="@animator/myt"
+
+        android:id="@+id/vf_t1"
+        android:layout_width="match_parent"
+        android:flipInterval="2000"
+        android:layout_height="400dp">
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/t1"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/t2"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/t3"/>
+    </ViewFlipper>
+</LinearLayout>
