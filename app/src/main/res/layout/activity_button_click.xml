@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".widget.ButtonClick">
     <TextView
         android:layout_width="wrap_content"
@@ -17,4 +16,14 @@
     android:onClick="bindMyService"
     android:text="bindMyService"
     android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:onClick="errorService"
+        android:text="ErrorService"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:onClick="trueService"
+        android:text="TrueService"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

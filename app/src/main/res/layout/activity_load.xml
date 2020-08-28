@@ -12,4 +12,10 @@
     android:text="goPage"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
+    <Button
+        android:onClick="goReceiver"
+        android:gravity="center"
+        android:text="goReceiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

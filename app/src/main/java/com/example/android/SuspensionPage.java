@@ -25,6 +25,7 @@ public class SuspensionPage extends AppCompatActivity {
             MyToast.mContext =getApplicationContext();
         }
         System.out.println("----SuspensionPage Start");
+        checkOverlayPermission();
     }
 
     void checkOverlayPermission(){

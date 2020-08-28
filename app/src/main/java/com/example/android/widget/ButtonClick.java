@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -27,17 +28,20 @@ import com.example.android.MainActivity;
 import com.example.android.R;
 import com.example.android.SuspensionPage;
 import com.example.android.service.MyIntentService;
+import com.example.android.service.MyService;
 import com.example.android.service.OverlayService;
 
 public class ButtonClick extends AppCompatActivity {
     long currentSystemTime;
     TextView textView;
+    Intent myIntent  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button_click);
-textView=findViewById(R.id.tv_3);
+        textView=findViewById(R.id.tv_3);
+        myIntent= new Intent(this, MyService.class);
     }
     public  void bindMyService(View view){
 //        System.out.println("------Start Bind-----");
@@ -79,6 +83,7 @@ textView=findViewById(R.id.tv_3);
 //        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(intent);
+//            startService(intent);
         } else {
             startService(intent);
         }
@@ -115,5 +120,26 @@ textView=findViewById(R.id.tv_3);
         }
         return false;
 
+    }
+
+    public void errorService(View view) {
+        System.out.println("Waiting Error Service");
+       new Handler().postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               myIntent.putExtra("type",2);
+               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                   System.out.println("Start Error Service");
+                   startForegroundService(myIntent);
+               }
+           }
+       },7000);
+    }
+
+    public void trueService(View view) {
+        myIntent.putExtra("type",2);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startService(myIntent);
+        }
     }
 }
