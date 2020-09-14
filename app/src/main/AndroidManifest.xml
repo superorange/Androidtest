@@ -9,6 +9,7 @@
     <uses-permission
         android:name="android.permission.use_alert_window"
         android:protectionLevel="normal" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <permission
         android:name="android.permission.use_alert_window"
@@ -21,8 +22,20 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".clent.SearchActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".retrofit.RetrofitActivity"></activity>
+        <activity android:name=".custom_view.CustomViewActivity" />
+        <activity android:name=".xuanfuchaung.XuanFuChuangActivity" />
+        <activity android:name=".media.MediaActivity" />
+        <activity android:name=".fragment.FragmentActivity" />
+        <activity android:name=".clent.SearchActivity" />
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <receiver
             android:name=".MyReceiver"
@@ -63,6 +76,16 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SuspensionPage" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <service
             android:name=".service.OverlayService"
             android:enabled="true" />
@@ -74,6 +97,7 @@
             </intent-filter>
         </service>
         <service android:name=".service.MyService" />
+        <service android:name=".xuanfuchaung.XuanFuService" />
     </application>
 
 </manifest>

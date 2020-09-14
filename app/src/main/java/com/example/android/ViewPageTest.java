@@ -52,6 +52,7 @@ public class ViewPageTest extends AppCompatActivity {
 
         MyPageAdapter  adapter=new MyPageAdapter(data);
         viewPager.setAdapter(adapter);
+        viewPager.getCurrentItem();
         adapter.notifyDataSetChanged();
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override

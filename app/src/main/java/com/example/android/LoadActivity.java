@@ -1,6 +1,7 @@
 package com.example.android;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,16 +9,21 @@ import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Application;
+import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.content.res.XmlResourceParser;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -30,26 +36,59 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.clent.SearchActivity;
+import com.example.android.custom_view.CustomViewActivity;
+import com.example.android.fragment.FragmentActivity;
+import com.example.android.media.MediaActivity;
+import com.example.android.retrofit.RetrofitActivity;
 import com.example.android.service.AidlTestService;
 import com.example.android.widget.ButtonClick;
 import com.example.android.widget.MyToast;
+import com.example.android.xuanfuchaung.XuanFuChuangActivity;
+import com.tbidea.flutterpluginfilepreview.FlutterpluginfilepreviewPlugin;
+import com.tbidea.flutterpluginfilepreview.MethodPluginCallHandler;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+
+import javax.xml.parsers.SAXParserFactory;
+
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.FlutterEngineCache;
+import io.flutter.embedding.engine.dart.DartExecutor;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
 public class LoadActivity extends AppCompatActivity {
 
     private static final int REQUEST_DIALOG_PERMISSION = 10;
-
+    FlutterEngine flutterEngine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_load);
         MyToast.mContext=this;
        if( ActivityCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW)!= PackageManager.PERMISSION_GRANTED){
            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SYSTEM_ALERT_WINDOW},1);
        }
+        FlutterEngine  flutterEngine = new FlutterEngine(this);
+        flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
+        FlutterEngineCache.getInstance().put("default", flutterEngine);
+        FlutterpluginfilepreviewPlugin flutterPlugin = (FlutterpluginfilepreviewPlugin) flutterEngine.getPlugins().get(FlutterpluginfilepreviewPlugin.class);
+        assert flutterPlugin != null;
+        flutterPlugin.setOnClickListener(new MethodPluginCallHandler.CallBack() {
+            @Override
+            public void call() {
+                    startActivity(new Intent(LoadActivity.this,QQChatActivity.class));
+            }
 
+        });
     }
 
     @Override
@@ -80,9 +119,33 @@ public class LoadActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void goPage(View view) {
-        goTo(SearchActivity.class);
+//        boolean equals = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+//        if(equals){
+//            System.out.println("Media already mounted");
+//            try {
+//
+//                String canonicalPath = Environment.getExternalStorageDirectory().getCanonicalPath();
+//
+//                System.out.println("path:"+canonicalPath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        File file =new File("/storage/emulated/0");
+//        if(file.exists()){
+//            System.out.println("file already mounted");
+//        }
+
+
+
+        goTo(RetrofitActivity.class);
 //        requestSettingCanDrawOverlays();
 //        bindService(new Intent(this, AidlTestService.class), new ServiceConnection() {
 //            @Override
@@ -179,11 +242,64 @@ public class LoadActivity extends AppCompatActivity {
     }
 
 
-    public void goReceiver(View view) {
+    public void goReceiver(View view) throws XmlPullParserException {
         System.out.println("goReceiver");
         LocalBroadcastManager instance = LocalBroadcastManager.getInstance(this);
         instance.registerReceiver(new MyReceiver(),new IntentFilter());
         instance.sendBroadcast(new Intent());
         instance.unregisterReceiver(new MyReceiver());
+
+    }
+
+    public void openFlutter(View view) {
+
+        startActivity(
+                FlutterActivity
+                        .withCachedEngine("default")
+                        .build(this)
+        );
+
+    }
+
+    public void openTest(View view) {
+
+    }
+}
+
+class  AppLife implements ActivityLifecycleCallbacks{
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+
     }
 }

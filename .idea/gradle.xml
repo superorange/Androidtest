@@ -11,6 +11,15 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../my_flutter" />
+            <option value="$PROJECT_DIR$/../my_flutter/.android/Flutter" />
+            <option value="$PROJECT_DIR$/../my_flutter/plugins/yttx_suifang/plugin/flutter_plugin_file_preview/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider-1.6.10/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-5.0.1+1/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/photo_manager-0.5.8/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.5.10/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-5.5.3/android" />
+            <option value="D:/sdk/flutter_windows_1.17.5-stable/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player-0.10.12+2/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
