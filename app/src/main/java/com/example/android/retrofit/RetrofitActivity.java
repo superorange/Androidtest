@@ -9,6 +9,7 @@ import com.example.android.R;
 
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +20,8 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class RetrofitActivity extends AppCompatActivity {
 
@@ -32,15 +35,17 @@ public class RetrofitActivity extends AppCompatActivity {
         String baseUrl="https://www.wanandroid.com/article/list/0/";
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl).build();
+
         MyServer myServer = retrofit.create(MyServer.class);
         Call<ResponseBody> data = myServer.getData();
-
+        String s = data.request().url().encodedPath();
+        System.out.println("TAG:"+s);
         data.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String json = response.body().string();
-                    System.out.println("TAG:"+response.body().string());
+                    System.out.println("Data:"+response.body().string());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -48,7 +53,7 @@ public class RetrofitActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                System.out.println("Error:"+t.getMessage());
             }
         });
     }
